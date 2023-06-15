@@ -16,6 +16,10 @@ const AboutPage = () => {
           My default route is named <code>about</code>, link to me with `
           <Link to={routes.about()}>About</Link>`
         </p>
+        <p>
+          To go back to the home page, click here`
+          <Link to={routes.home()}>Return Home</Link>`
+        </p>
       </div>
     </>
   )
