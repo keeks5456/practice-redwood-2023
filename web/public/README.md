@@ -1,6 +1,6 @@
 # Static Assets
 Use this folder to add static files directly to your app. All included files and folders will be copied directly into the `/dist` folder (created when Webpack builds for production). They will also be available during development when you run `yarn rw dev`.
->Note: files will *not* hot reload while the development server is running. You'll need to manually stop/start to access file changes.
+>Note: files will *not* hot reload while the development server is running. You'll need to manually stop/start to access file changes. hello
 
 ### Example Use
 A file like `favicon.png` will be copied to `/dist/favicon.png`. A folder containing a file such as `static-files/my-logo.jpg` will be copied to `/dist/static-files/my-logo.jpg`. These can be referenced in your code directly without any special handling, e.g.
