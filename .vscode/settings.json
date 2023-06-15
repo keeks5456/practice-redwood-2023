@@ -7,5 +7,10 @@
   },
   "[prisma]": {
     "editor.formatOnSave": true
-  }
+  },
+  "cSpell.words": [
+    "akiko",
+    "redwoodjs",
+    "sfsu"
+  ]
 }
