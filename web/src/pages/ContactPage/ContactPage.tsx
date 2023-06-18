@@ -1,4 +1,10 @@
 // import { Link, routes } from '@redwoodjs/router'
+
+import {
+  CreateContactMutation,
+  CreateContactMutationVariables,
+} from 'types/graphql'
+
 import {
   FieldError,
   Form,
@@ -8,8 +14,15 @@ import {
   Submit,
   SubmitHandler,
 } from '@redwoodjs/forms'
-import { MetaTags } from '@redwoodjs/web'
+import { MetaTags, useMutation } from '@redwoodjs/web'
 
+const CREATE_CONTACT = gql`
+  mutation CreateContactMutation($input: CreateContactInput!) {
+    createContact(input: $input) {
+      id
+    }
+  }
+`
 interface FormValue {
   input: string
   email: string
@@ -17,8 +30,12 @@ interface FormValue {
 }
 
 const ContactPage = () => {
+  const [create, { loading, error }] = useMutation<
+    CreateContactMutation,
+    CreateContactMutationVariables
+  >(CREATE_CONTACT)
   const onSubmit: SubmitHandler<FormValue> = (data) => {
-    console.log(data)
+    create({ variables: { input: data } })
   }
 
   return (
@@ -29,17 +46,7 @@ const ContactPage = () => {
         <Label name={'name'} errorClassName="error">
           Name
         </Label>
-        <TextField
-          name="name"
-          validation={{
-            required: true,
-            pattern: {
-              value: /^[^@]+@[^.]+\..+$/,
-              message: 'Please enter a valid email address',
-            },
-          }}
-          errorClassName="error"
-        />
+        <TextField name="name" errorClassName="error" />
         <FieldError name="name" className="error" />
 
         <Label name={'email'} errorClassName="error">
@@ -47,7 +54,13 @@ const ContactPage = () => {
         </Label>
         <TextField
           name="email"
-          validation={{ required: true }}
+          validation={{
+            required: true,
+            pattern: {
+              value: /^[^@]+@[^.]+\..+$/,
+              message: 'Please enter a valid email address',
+            },
+          }}
           errorClassName="error"
         />
         <FieldError name="email" className="error" />
@@ -62,7 +75,7 @@ const ContactPage = () => {
         />
         <FieldError name="message" className="error" />
 
-        <Submit>Save</Submit>
+        <Submit disabled={loading}>Save</Submit>
       </Form>
     </>
   )
