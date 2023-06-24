@@ -109,14 +109,15 @@ export const handler = async (
     // `signUp()` function in the form of: `{ message: 'String here' }`.
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     handler: ({ username, hashedPassword, salt, userAttributes }) => {
-      return db.user.create({
-        data: {
-          email: username,
-          hashedPassword: hashedPassword,
-          salt: salt,
-          // name: userAttributes.name,
-        },
-      })
+      return false
+      //  db.user.create({
+      //   data: {
+      //     email: username,
+      //     hashedPassword: hashedPassword,
+      //     salt: salt,
+      //     // name: userAttributes.name,
+      //   },
+      // })
     },
 
     // Include any format checks for password here. Return `true` if the
